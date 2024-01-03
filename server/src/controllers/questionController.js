@@ -1,16 +1,19 @@
 import asyncHandler from "../utils/AsyncHandler.js";
 import { Question } from "../models/Question.Model.js";
-import {College} from "../models/College.Model.js";
+import { College } from "../models/College.Model.js";
 
 const userQuestion = asyncHandler(async (req, res) => {
   try {
-    const { collegeId, question, hashtags, userId } = req.body;
+    const { collegeId, question, hashtags } = req.body;
+    const { user } = req.user;
+    const { description } = req;
 
     const newQuestion = new Question({
       college: collegeId,
       question,
       hashtags,
-      user: userId,
+      user: user._id,
+      description,
     });
     await newQuestion.save();
 
@@ -20,21 +23,23 @@ const userQuestion = asyncHandler(async (req, res) => {
       { new: true }
     );
 
-    res.status(201).json({ message: 'Question created successfully' });
+    res.status(201).json({ message: "Question created successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: 'Internal Server Error' });
+    res.status(500).json({ message: "Internal Server Error" });
   }
 });
 
 const getAllQuestionsForCollege = asyncHandler(async (req, res) => {
-  const { collegeId } = req.params; 
+  const { collegeId } = req.params;
 
-  const questions = await Question.find({ college: collegeId }).populate("user", "name");
-  
+  const questions = await Question.find({ college: collegeId }).populate(
+    "user",
+    "name"
+  );
+
   res.json(questions);
 });
-
 
 const getQuestionByIdForCollege = asyncHandler(async (req, res) => {
   const { collegeId, questionId } = req.params;
