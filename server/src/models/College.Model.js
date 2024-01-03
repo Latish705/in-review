@@ -1,23 +1,13 @@
 import mongoose from "mongoose";
-const collegeScheme = new mongoose.Schema({
-  name,
-  email,
-  phone,
-  address,
-  city,
-  state,
-  country,
-  pincode,
-  website,
-  collegeType,
-  collegeCategory,
-  collegeEstablishment,
-  collegeCourses,
-  collegeFees,
-  collegeDescription,
-  collegeImage,
-  collegeVideo,
-  collegeBrochure,
-  collegeLogo,
-  collegeGallery,
+const CollegeSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  category: { type: String, required: true },
+  students: { type: Number },
+  rank: { type: Number },
+  courses: [{ type: String }],
+  reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
 });
+
+const College = mongoose.model("College", CollegeSchema);
+
+module.exports = College;
