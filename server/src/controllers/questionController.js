@@ -1,20 +1,40 @@
 import asyncHandler from "../utils/AsyncHandler.js";
 import { Question } from "../models/Question.Model.js";
+import {College} from "../models/College.Model.js";
 
 const userQuestion = asyncHandler(async (req, res) => {
-  const { question } = req.body;
-  const { id } = req.user;
-  const newQuestion = new Question({
-    question,
-    user: id,
-  });
-  const createdQuestion = await newQuestion.save();
-  res.status(201).json(createdQuestion);
+  try {
+    const { collegeId, question, hashtags, userId } = req.body;
+
+    const newQuestion = new Question({
+      college: collegeId,
+      question,
+      hashtags,
+      user: userId,
+    });
+    await newQuestion.save();
+
+    await College.findByIdAndUpdate(
+      collegeId,
+      { $push: { reviews: newQuestion._id } },
+      { new: true }
+    );
+
+    res.status(201).json({ message: 'Question created successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
-const getAllQuestions = asyncHandler(async (req, res) => {
-  const questions = await Question.find({}).populate("user", "name");
+
+const getAllQuestionsForCollege = asyncHandler(async (req, res) => {
+  const { collegeId } = req.params; 
+
+  const questions = await Question.find({ college: collegeId }).populate("user", "name");
+  
   res.json(questions);
 });
+
 const getQuestionById = asyncHandler(async (req, res) => {
   const { user } = req.user;
 
