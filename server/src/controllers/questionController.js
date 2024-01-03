@@ -6,13 +6,14 @@ const userQuestion = asyncHandler(async (req, res) => {
   try {
     const { collegeId, question, hashtags } = req.body;
     const { user } = req.user;
-    const { description } = req?.description;
+    const { description } = req;
 
     const newQuestion = new Question({
       college: collegeId,
       question,
       hashtags,
       user: user._id,
+      description,
     });
     await newQuestion.save();
 
@@ -39,7 +40,6 @@ const getAllQuestionsForCollege = asyncHandler(async (req, res) => {
 
   res.json(questions);
 });
-
 
 const getQuestionByIdForCollege = asyncHandler(async (req, res) => {
   const { collegeId, questionId } = req.params;
