@@ -24,6 +24,15 @@ const userAnswer=asyncHandler(async(req,res)=>{
 
 });
 
+const getAllanswers=asyncHandler(async(req,res)=>{
+  const {collegeId,questionId}=req.params;
+  const answers=await Answer.find({answerOf:questionId},{college:collegeId}).populate(
+    "user",
+    "name"
+  );
+  res.json(answers);
+})
+
 const upvoteAnswer = asyncHandler(async (req, res) => {
    const { answerId } = req.params;
    const updatedAnswer = await Answer.findByIdAndUpdate(
