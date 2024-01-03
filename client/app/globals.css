@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.svg-line::after {
+    
+}
+
+.cover::before {
+    content: '';
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    background-color: rgba(139, 143, 146, 0.096);
+    z-index: 10;
+}
+
+.svg-icon {
+    transition: fill 0.2s
+}
+
+span:hover .svg-icon {
+    fill: white;
+}
