@@ -1,6 +1,7 @@
 import { karma, inter } from './layout';
 import Navbar from '@/app/ui/navbar.js';
 import CollegeList from '@/app/ui/collegeList';
+import Footer from '@/app/ui/footer';
 
 export default function Home() {
 
@@ -83,7 +84,7 @@ export default function Home() {
       </section>
 
       <section>
-        
+        <Footer/>
       </section>
 
     </main>
