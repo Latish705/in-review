@@ -6,6 +6,7 @@ const QuestionSchema = new mongoose.Schema({
     ref: "College",
     required: true,
   },
+  description: { type: String },
   question: { type: String, required: true },
   hashtags: [{ type: String }],
   upvotes: { type: Number, default: 0 },
