@@ -25,3 +25,7 @@ const getQuestionById = asyncHandler(async (req, res) => {
     throw new Error("Question not found");
   }
 });
+
+const upvoteAQues = asyncHandler(async (req, res) => {
+  const { user } = req.user;
+});

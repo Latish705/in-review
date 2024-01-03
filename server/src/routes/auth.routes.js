@@ -15,4 +15,6 @@ authRouter.route("/register").post(
 
 authRouter.route("/login").post(loginUser);
 
+authRouter.route("/logout").post();
+
 export default authRouter;
