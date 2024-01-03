@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import College from "./College.Model"
 
 const AnswerSchema = new mongoose.Schema({
   answerOf: {
@@ -10,6 +11,11 @@ const AnswerSchema = new mongoose.Schema({
   answer: { type: String, required: true },
   upvotes: { type: Number, default: 0 },
   downvotes: { type: Number, default: 0 },
+  college: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "College",
+    required: true,
+  },
 });
 
 const Answer = mongoose.model("Answer", AnswerSchema);
