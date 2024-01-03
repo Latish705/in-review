@@ -1,0 +1,3 @@
+{/*
+    port/college/[collegeId]/overview
+*/}
