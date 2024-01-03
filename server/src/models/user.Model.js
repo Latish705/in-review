@@ -27,6 +27,7 @@ const UserSchema = new mongoose.Schema({
   branch: { type: String, required: true },
   post: { type: String, required: null },
   cgpa: { type: Number, required: true },
+  accessToken: { type: String },
 });
 
 export const User = mongoose.model("User", UserSchema);
