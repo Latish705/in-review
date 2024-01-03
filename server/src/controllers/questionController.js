@@ -35,15 +35,20 @@ const getAllQuestionsForCollege = asyncHandler(async (req, res) => {
   res.json(questions);
 });
 
-const getQuestionById = asyncHandler(async (req, res) => {
-  const { user } = req.user;
 
-  const question = await Question.findById(user._id).populate("user", "name");
+const getQuestionByIdForCollege = asyncHandler(async (req, res) => {
+  const { collegeId, questionId } = req.params;
+
+  const question = await Question.findOne({
+    _id: questionId,
+    college: collegeId,
+  }).populate("user", "name");
+
   if (question) {
     res.json(question);
   } else {
     res.status(404);
-    throw new Error("Question not found");
+    throw new Error("Question not found for the specified college");
   }
 });
 
