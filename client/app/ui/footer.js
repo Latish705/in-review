@@ -1,7 +1,7 @@
 
 const Footer = () => {
   return (
-    <div className='flex flex-col p-10 bg-blue-900 text-white  font-bold  gap-8'>
+    <div className='footer flex flex-col p-10 py-20 bg-footer text-white  font-bold  gap-8'>
       <div className='flex justify-between '>
         <div className='text-3xl'>In-Review</div>
         <div>
