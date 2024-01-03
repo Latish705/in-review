@@ -1,8 +1,8 @@
-import { User } from "../models/userModel.js";
+import { User } from "../models/user.model.js";
 import { asyncHandler } from "../utils/AsyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 // import { Jwt } from "jsonwebtoken";
-import { uploadToCloudinary } from "../utils/uploadToCloundinary.js";
+import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 // import { hashPassword } from "../utils/bcrypt.js";
 
 const generateAccessAndRefreshTokens = async (userId) => {

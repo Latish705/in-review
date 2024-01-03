@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import authRouter from "./routes/authRoutes.js";
+import authRouter from "./routes/auth.routes.js";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 
