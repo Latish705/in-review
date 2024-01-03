@@ -1,0 +1,48 @@
+const registerCollegeForm = async (req, res) => {
+  const {
+    name,
+    email,
+    phone,
+    address,
+    city,
+    state,
+    country,
+    pincode,
+    website,
+    collegeType,
+    collegeCategory,
+    collegeEstablishment,
+    collegeCourses,
+    collegeFees,
+    collegeDescription,
+    collegeImage,
+    collegeVideo,
+    collegeBrochure,
+    collegeLogo,
+    collegeGallery,
+  } = req.body;
+  const newCollegeForm = new CollegeForm({
+    name,
+    email,
+    phone,
+    address,
+    city,
+    state,
+    country,
+    pincode,
+    website,
+    collegeType,
+    collegeCategory,
+    collegeEstablishment,
+    collegeCourses,
+    collegeFees,
+    collegeDescription,
+    collegeImage,
+    collegeVideo,
+    collegeBrochure,
+    collegeLogo,
+    collegeGallery,
+  });
+  const createdCollegeForm = await newCollegeForm.save();
+  res.status(201).json(createdCollegeForm);
+};
