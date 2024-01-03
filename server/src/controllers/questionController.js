@@ -1,4 +1,6 @@
 import asyncHandler from "../utils/AsyncHandler.js";
+import { Question } from "../models/Question.Model.js";
+
 const userQuestion = asyncHandler(async (req, res) => {
   const { question } = req.body;
   const { id } = req.user;
@@ -14,10 +16,9 @@ const getAllQuestions = asyncHandler(async (req, res) => {
   res.json(questions);
 });
 const getQuestionById = asyncHandler(async (req, res) => {
-  const question = await Question.findById(req.params.id).populate(
-    "user",
-    "name"
-  );
+  const { user } = req.user;
+
+  const question = await Question.findById(user._id).populate("user", "name");
   if (question) {
     res.json(question);
   } else {
