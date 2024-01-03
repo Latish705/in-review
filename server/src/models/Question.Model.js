@@ -10,6 +10,7 @@ const QuestionSchema = new mongoose.Schema({
   question: { type: String, required: true },
   hashtags: [{ type: String }],
   upvotes: { type: Number, default: 0 },
+  downvotes: { type: Number, default: 0 },
   answers: [{ type: mongoose.Schema.Types.ObjectId, ref: "Answer" }],
   user: {
     type: mongoose.Schema.Types.ObjectId,

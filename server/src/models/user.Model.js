@@ -23,6 +23,7 @@ const UserSchema = new mongoose.Schema({
       end: { type: Number, required: true },
     },
   },
+  bookmarks: { type: mongoose.Schema.Types.ObjectId, ref: "Question" },
   branch: { type: String, required: true },
   post: { type: String, required: null },
   cgpa: { type: Number, required: true },
