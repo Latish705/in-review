@@ -52,6 +52,22 @@ const getQuestionByIdForCollege = asyncHandler(async (req, res) => {
   }
 });
 
-const upvoteAQues = asyncHandler(async (req, res) => {
-  const { user } = req.user;
+const upvoteQuestion = asyncHandler(async (req, res) => {
+  const { questionId } = req.params;
+  const updatedQuestion = await Question.findByIdAndUpdate(
+    questionId,
+    {$inc:{upvotes:1}},
+    {new:true}
+  );
+
+  res.json(updatedQuestion);
 });
+
+const downvoteQuestion=asyncHandler(async(req,res)=>{
+  const {questionId}=req.params;
+  const updatedQuestion=await Question.findByIdAndUpdate(
+    questionId,
+    {$inc:{downvotes:1}},
+    {new:true}
+  )
+})
