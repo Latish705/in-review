@@ -1,12 +1,13 @@
-import asyncHandler from "../utils/AsyncHandler.js";
+import { asyncHandler } from "../utils/AsyncHandler.js";
 import { Question } from "../models/Question.Model.js";
 import { College } from "../models/College.Model.js";
 import { Answer } from "./../models/Answers.Model.js";
 
 export const userAnswer = asyncHandler(async (req, res) => {
-  const { questionId } = req.body.questionId;
-  const { answer } = req.body.answer;
+  const { questionId } = req.body;
+  const { answer } = req.body;
 
+  console.log(questionId, answer);
   const newAnswer = new Answer({
     answerOf: questionId,
     answer,
@@ -19,7 +20,7 @@ export const userAnswer = asyncHandler(async (req, res) => {
     { new: true }
   );
 
-  res.status(201).json({ message: "Answer created successfully" });
+  res.status(201).json({ message: "Answer created successfully", newAnswer });
 });
 
 export const getAllanswers = asyncHandler(async (req, res) => {
@@ -49,5 +50,4 @@ export const downvoteAnswer = asyncHandler(async (req, res) => {
   );
 
   res.json(updatedAnswer);
-
 });

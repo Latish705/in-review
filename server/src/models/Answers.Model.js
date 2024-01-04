@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import College from "./College.Model";
 
 const AnswerSchema = new mongoose.Schema({
   answerOf: {
@@ -17,6 +16,4 @@ const AnswerSchema = new mongoose.Schema({
   },
 });
 
-const Answer = mongoose.model("Answer", AnswerSchema);
-
-module.exports = Answer;
+export const Answer = mongoose.model("Answer", AnswerSchema);

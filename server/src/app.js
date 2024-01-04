@@ -6,6 +6,7 @@ import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import questionRoutes from "./routes/question.routes.js";
 import collegeRouter from "./routes/college.routes.js";
+import answerRoutes from "./routes/answer.routes.js";
 
 dotenv.config({
   path: "./.env",
@@ -30,6 +31,6 @@ app.use("/api/v1", collegeRouter);
 app.use("/api/v1", questionRoutes);
 
 // answer routes
-// app.use("/api/v1");
+app.use("/api/v1", answerRoutes);
 
 export default app;

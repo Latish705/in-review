@@ -1,15 +1,15 @@
 import { Router } from "express";
 import {
-  getAllAnswers,
+  getAllanswers,
   userAnswer,
   upvoteAnswer,
   downvoteAnswer,
-} from "../controllers/answerController";
-import {} from "../middlewares/authMiddleware";
+} from "../controllers/answerController.js";
+// import {} from "../middlewares/authMiddleware";
 
 const answerRoutes = Router();
 
-answerRoutes.route("/getAnswersFor").get(getAllAnswers);
+answerRoutes.route("/getAnswersFor").get(getAllanswers);
 
 answerRoutes.route("/submitAnswer").post(userAnswer);
 

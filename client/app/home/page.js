@@ -23,7 +23,7 @@ export default function Home() {
         questionsArray.map((question) => {
           return (
             <QuestionInterface
-              id={question._Id}
+              id={question._id}
               title={question.question}
               description={question.description}
               upvotes={question.upvotes}
