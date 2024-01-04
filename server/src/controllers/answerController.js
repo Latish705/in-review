@@ -30,21 +30,24 @@ export const getAllanswers = asyncHandler(async (req, res) => {
 });
 
 export const upvoteAnswer = asyncHandler(async (req, res) => {
-  const { answerId } = req.params;
+  const { answerId } = req.body;
   const updatedAnswer = await Answer.findByIdAndUpdate(
     answerId,
     { $inc: { upvotes: 1 } },
     { new: true }
   );
 
-  res.json(updatedQuestion);
+  res.json(updatedAnswer);
 });
 
 export const downvoteAnswer = asyncHandler(async (req, res) => {
-  const { answerId } = req.params;
+  const { answerId } = req.body;
   const updatedAnswer = await Answer.findByIdAndUpdate(
     answerId,
     { $inc: { downvotes: 1 } },
     { new: true }
   );
+
+  res.json(updatedAnswer);
+
 });
