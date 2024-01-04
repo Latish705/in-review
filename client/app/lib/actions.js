@@ -63,8 +63,11 @@ export async function downVoteQuestion(questionId) {
   }
 }
 
-export async function getQuestionDetail(questionId) {
+export async function getResponses(quesitonId) {
   try {
+    const response = await axios.get("...route to get answers", quesitonId);
+
+    return response.data.answers;
   } catch (error) {
     throw new Error(error);
   }
