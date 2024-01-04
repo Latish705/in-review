@@ -11,7 +11,7 @@ export const collegReq = asyncHandler(async (req, res) => {
   // reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
 
   const { name, category, courses } = req.body;
-
+  console.log(name, category, courses);
   if ([name, category, courses].some((field) => field.trim() === "")) {
     throw new ApiError(400, "All fields are required");
   }
@@ -30,7 +30,7 @@ export const collegReq = asyncHandler(async (req, res) => {
     courses,
   });
 
-  await college.save();
+  await College.save();
 
   res.status(201).json(college);
 });

@@ -4,6 +4,6 @@ import { collegReq } from "../controllers/collegeFromController.js";
 
 const collegeRouter = Router();
 
-collegeRouter.route("/createCollege").post(verifyToken, collegReq);
+collegeRouter.route("/createCollege").post(collegReq);
 
 export default collegeRouter;
