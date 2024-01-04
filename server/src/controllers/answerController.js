@@ -5,8 +5,9 @@ import {Answer} from "./../models/Answers.Model.js";
 
 const userAnswer=asyncHandler(async(req,res)=>{
 
-   const {collegeId,questionId}=req.params;
-   const {answer}=req.body;
+   const {questionId}=req.body.questionId;
+   const {answer}=req.body.answer;
+   
    const newAnswer=new Answer({
     answerOf:questionId,
     answer,
