@@ -1,8 +1,10 @@
+import Link from "next/link";
 
-export default function QuestionInterface({title, description, upvotes, downvotes, name, profilePicture}) {
+export default function QuestionInterface({title, id, description, upvotes, downvotes, name, profilePicture}) {
     
     return (
         <section className="border-b cursor-pointer hover:bg-gray-50 pt-10">
+            <Link href={`/home/${id}/details`}>
             <header className="ml-1">
                 <div>
                     <img src="" alt="" />
@@ -17,11 +19,11 @@ export default function QuestionInterface({title, description, upvotes, downvote
                     </p>
                     <p>{description}</p>
                     <span className="text-blue-500 cursor-pointer hover:underline">
-                        More details
+                        See Responses
                     </span>
                 </div>
             </main>
-
+            </Link>
             <div className="border-t mx-4 flex gap-4 py-2"> 
                 <div className="flex gap-5 items-center"> {/* (upvote downvote) (response) */}
                     <div className="flex gap-2">
