@@ -3,7 +3,7 @@ export default function AnswerInterface(answer, upvotes, downvotes, id) {
     console.log(id);
   };
 
-  const HandleDownvote = (id) => {
+  const handleDownvote = (id) => {
     console.log(id);
   };
 
@@ -11,7 +11,7 @@ export default function AnswerInterface(answer, upvotes, downvotes, id) {
     <section className="border-b cursor-pointer hover:bg-gray-50 pt-10">
       <main className="mb-4 mx-2">
         <div>
-          <p>{answer}</p>
+          <p>{JSON.stringify(answer.answer)}</p>
           <span className="text-blue-500 cursor-pointer hover:underline"></span>
         </div>
       </main>
@@ -28,7 +28,7 @@ export default function AnswerInterface(answer, upvotes, downvotes, id) {
                   handleUpvote;
                 }}
               >
-                {upvotes}
+                {JSON.stringify(upvotes.upvotes)}
               </button>
             </span>
 
@@ -39,7 +39,7 @@ export default function AnswerInterface(answer, upvotes, downvotes, id) {
                   handleDownvote;
                 }}
               >
-                {downvotes}
+                {JSON.stringify(downvotes)}
               </button>
             </span>
           </div>

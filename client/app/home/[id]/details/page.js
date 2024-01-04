@@ -24,12 +24,14 @@ export default function ResponsesPage() {
 
   return (
     <div>
-      {Array.isArray(answersArray) &&
+      {answersArray &&
         answersArray.map((thisAnswer) => (
           <AnswerInterface
+            key={thisAnswer.upvotes}
             answer={thisAnswer.answer}
             upvotes={thisAnswer.upvotes}
             downvotes={thisAnswer.downvotes}
+            id={thisAnswer._id}
           />
         ))}
     </div>
