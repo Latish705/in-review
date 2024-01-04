@@ -1,8 +1,36 @@
+'use client';
 
-export default function ResponsesPage() {
+import React from 'react';
+import AnswerInterface from "@/app/ui/home/answerInterface";
+import { getAnswers } from "@/app/lib/actions";
+
+export default function ResponsesPage(params) {
+    
+    const questionId = params.id;
+    const [answersArray, setAnswersArray] = React.useState([]);
+
+    React.useEffect(()=>{
+        const fillAnswersArray = async (Id) => {
+            const responseArray = await getAnswers(Id);
+            console.log(responseArray);
+            setAnswersArray(responseArray);
+        }
+
+        fillAnswersArray();
+    },[])
+
     return (
         <div>
-            responses
+            {
+                answersArray &&
+                answersArray.map((thisAnswer) => (
+                    <AnswerInterface
+                        answer={thisAnswer.answer}
+                        upvotes={thisAnswer.answer}
+                        downvotes={thisAnswer.answer}
+                    />
+                ))
+            }
         </div>
     )
 }
