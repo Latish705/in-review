@@ -1,24 +1,26 @@
 import Link from "next/link";
-import { questionUpvote, questionDownvote } from "@/app/lib/actions";
+import { upvoteQuestion, downVoteQuestion } from '@/app/lib/actions'
 
-export default function QuestionInterface({
-  title,
-  id,
-  description,
-  upvotes,
-  downvotes,
-  name,
-  profilePicture,
-}) {
-  return (
-    <section className="border-b cursor-pointer hover:bg-gray-50 pt-10">
-      <Link href={`/home/${id}/details`}>
-        <header className="ml-1">
-          <div>
-            <img src="" alt="" />
-            <div>{name}</div>
-          </div>
-        </header>
+export default function QuestionInterface({title, id, description, upvotes, downvotes, name, profilePicture}) {
+
+    const handleUpvote = async (id) => {
+        const responseOfUpvote = await upvoteQuestion (id)
+        upvotes++;
+    }
+    const handleDownvote = async (id) => {
+        const responseOfDownvote = await downVoteQuestion(id);
+        downvotes++;
+    }
+    
+    return (
+        <section className="border-b cursor-pointer hover:bg-gray-50 pt-10">
+            <Link href={`/home/${id}/details`}>
+            <header className="ml-1">
+                <div>
+                    <img src="" alt="" />
+                    <div>{name}</div>
+                </div>
+            </header>
 
         <main className="mb-4 mx-2">
           <div>
