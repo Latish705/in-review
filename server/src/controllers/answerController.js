@@ -24,13 +24,12 @@ const userAnswer=asyncHandler(async(req,res)=>{
 
 });
 
-const getAllanswers=asyncHandler(async(req,res)=>{
-  const {collegeId,questionId}=req.params;
-  const answers=await Answer.find({answerOf:questionId},{college:collegeId}).populate(
-    "user",
-    "name"
-  );
+const getAllanswers = asyncHandler(async(req,res)=>{
+  const { questionId }= req.body;
+  
+  const answers = await Answer.find({answerOf:questionId});
   res.json(answers);
+
 })
 
 const upvoteAnswer = asyncHandler(async (req, res) => {

@@ -51,10 +51,10 @@ export async function downVoteQuestion (questionId) {
     }
 }
 
-export async function getQuestionDetail (questionId) {
+export async function getResponses (quesitonId) => {
     try {
-
-    } catch (error) {
-        throw new Error (error);
+        const response = await axios
     }
 }
+
+

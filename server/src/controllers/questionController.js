@@ -47,8 +47,7 @@ export const getQuestionByIdForCollege = asyncHandler(async (req, res) => {
 
   const question = await Question.findOne({
     _id: questionId,
-    college: collegeId,
-  }).populate("user", "name");
+  });
 
   if (question) {
     res.json(question);
