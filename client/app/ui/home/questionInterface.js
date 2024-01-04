@@ -1,4 +1,4 @@
-// import Link from "next/link";
+import Link from "next/link";
 import { questionUpvote, questionDownvote } from "@/app/lib/actions";
 
 export default function QuestionInterface({
