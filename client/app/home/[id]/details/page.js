@@ -2,7 +2,7 @@
 
 import React from 'react';
 import AnswerInterface from "@/app/ui/home/answerInterface";
-import { getAnswers } from "@/app/lib/actions";
+import { getResponses } from "@/app/lib/actions";
 
 export default function ResponsesPage(params) {
     
@@ -11,7 +11,7 @@ export default function ResponsesPage(params) {
 
     React.useEffect(()=>{
         const fillAnswersArray = async (Id) => {
-            const responseArray = await getAnswers(Id);
+            const responseArray = await getResponses(Id);
             console.log(responseArray);
             setAnswersArray(responseArray);
         }
