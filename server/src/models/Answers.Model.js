@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import College from "./College.Model"
+import College from "./College.Model";
 
 const AnswerSchema = new mongoose.Schema({
   answerOf: {
@@ -14,7 +14,6 @@ const AnswerSchema = new mongoose.Schema({
   college: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "College",
-    required: true,
   },
 });
 
