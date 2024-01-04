@@ -51,7 +51,7 @@ UserSchema.methods.generateAccessToken = async function () {
       password: this.password,
       fullName: this.fullName,
     },
-    process.env.JWT_ACCESS_TOKEN,
+    process.env.JWT_ACCESS_TOKEN_SECRET,
     {
       expiresIn: process.env.JWT_ACCESS_TOKEN_EXPIRY,
     }
@@ -63,7 +63,7 @@ UserSchema.methods.generateRefreshToken = async function () {
     {
       id: this._id,
     },
-    process.env.JWT_REFRESH_TOKEN,
+    process.env.JWT_REFRESH_TOKEN_SECRET,
     {
       expiresIn: process.env.JWT_REFRESH_TOKEN_EXPIRY,
     }

@@ -126,6 +126,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 //logut Controller
 
 export const logoutUser = asyncHandler(async (req, res) => {
+  console.log(req.user);
   await User.findByIdAndUpdate(
     req.user._id, //in req the user is sent by authMiddleware
     {
