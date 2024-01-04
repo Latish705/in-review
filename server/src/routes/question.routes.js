@@ -2,9 +2,11 @@ import { Router } from "express";
 import {
   userQuestion,
   upvoteQuestion,
+  downvoteQuestion,
   bookmarkQuestion,
   getAllQuestionsForCollege,
   getQuestionByIdForCollege,
+  downvoteQuestion,
 } from "../controllers/questionController.js";
 import { verifyToken } from "../middlewares/authMiddleware.js";
 
@@ -16,7 +18,7 @@ questionRoutes.route("/upvote-question").post(verifyToken, upvoteQuestion);
 
 questionRoutes
   .route("/downvote-question")
-  .post(verifyToken, getQuestionByIdForCollege);
+  .post(verifyToken, downvoteQuestion);
 
 questionRoutes.route("/bookmark-question").post(verifyToken, bookmarkQuestion);
 
