@@ -79,3 +79,29 @@ export async function getResponses(quesitonId) {
     // const response = await axios
   } catch (e) {}
 }
+
+export async function handleUpvote(answerId){
+  try {
+    const response=await axios.post(
+      "http://localhost:8080/api/v1/upvoteAnswer",
+      answerId
+    );
+    return response.data.updatedAnswer
+  } catch (error) {
+    throw new Error(error);
+    
+  }
+}
+
+export async function handleDownvote(answerId){
+  try {
+    const response=await axios.post(
+      "http://localhost:8080/api/v1/downvoteAnswer",
+      answerId
+    );
+    return response.data.updatedAnswer
+  } catch (error) {
+    throw new Error(error);
+    
+  }
+}
