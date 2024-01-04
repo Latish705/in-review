@@ -1,14 +1,36 @@
 'use client'
 import React, { useState } from 'react';
+import { userLogin } from '@/app/lib/actions';
+import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
+    
+    const router = useRouter();
 
-    const handleLogin = () => {
-        // login logic to be added
-        console.log('Logging in with:', { username, password, email });
+    const [userInfo, setUserInfo] = useState({
+        username: '',
+        email: '',
+        password: '',
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        setUserInfo((prev) => ({
+            ...prev,
+            [name]: value
+        }))
+    }
+
+    const handleLogin = async (userInfo) => {
+        try {
+            const response = await userLogin(userInfo);
+                alert('logged in');
+                router.push('/home')
+        } catch (error) {
+            throw new Error(error);
+        }
+
     };
 
     return (
@@ -22,8 +44,8 @@ const LoginForm = () => {
                             type="text"
                             id="username"
                             name="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={userInfo.username}
+                            onChange={handleChange}
                             className="w-full p-2 border rounded"
                         />
                     </div>
@@ -33,8 +55,8 @@ const LoginForm = () => {
                             type="password"
                             id="password"
                             name="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={userInfo.password}
+                            onChange={handleChange}
                             className="w-full p-2 border rounded"
                         />
                     </div>
@@ -44,8 +66,8 @@ const LoginForm = () => {
                             type="email"
                             id="email"
                             name="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={userInfo.email}
+                            onChange={handleChange}
                             className="w-full p-2 border rounded"
                         />
                     </div>
