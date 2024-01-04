@@ -33,15 +33,17 @@ export async function userLogin(info) {
 
 export async function getQuestion(collegeId) {
   try {
+    const id = "6596df24d9194c31336a784a";
     // correct the api
     // check that the return format is correct
-
-    const response = await axios.get(
+    console.log(collegeId);
+    const response = await axios.post(
       "http://localhost:8080/api/v1/get-all-question-college",
-      collegeId
+      { collegeId }
     );
+    console.log(response.data);
 
-    return { questions: response.data.questions };
+    return { questions: response.data };
   } catch (error) {
     throw new Error(error);
   }

@@ -32,13 +32,11 @@ export const userQuestion = asyncHandler(async (req, res) => {
 });
 
 export const getAllQuestionsForCollege = asyncHandler(async (req, res) => {
-  const { collegeId } = req.body.collegeId; // changed from params to body
+  const { collegeId } = req.body; // changed from params to body
+  console.log(collegeId);
 
-  const questions = await Question.find({ college: collegeId }).populate(
-    "user",
-    "name"
-  );
-
+  const questions = await Question.find({ college: collegeId });
+  console.log(questions);
   res.json(questions);
 });
 

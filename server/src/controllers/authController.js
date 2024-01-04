@@ -93,6 +93,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
   const passwordMatch = await user.isPasswordCorrect(password);
 
+  console.log(passwordMatch, password);
   if (!passwordMatch) {
     throw new ApiError(200, "Password incorrect");
   }
