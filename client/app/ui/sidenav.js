@@ -1,3 +1,4 @@
+import Link from 'next/link';
 
 export default function Sidenav() {
     return (
@@ -5,49 +6,49 @@ export default function Sidenav() {
             <div className="">
                 <span className="flex gap-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg"> 
                     <img src="/icons/home.svg" alt='home'/>
-                    <h2>Home</h2>
+                    <Link href="/home">Home</Link>
                 </span>
             </div>
 
             <div>
                 <span className="flex gap-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg">
                     <img src="/icons/search.svg" alt='explore'/>
-                    <h2>Explore</h2>
+                    <Link href="/explore">Explore</Link>
                 </span>
             </div>
 
             <div>
                 <span className="flex gap-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg">
                     <img src="/icons/group.svg" alt="community"/>
-                    <h2>Community</h2>
+                    <Link href="/community">Community</Link>
                 </span>
             </div>
 
             <div>
                 <span className="flex gap-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg">
                     <img src="/icons/notification.svg" alt="bell"/>
-                    <h2>Notifications</h2>
+                    <Link href="/home/notifications">Notifications</Link>
                 </span>
             </div>
 
             <div>
                 <span className="flex gap-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg">
                     <img src='/icons/profile.svg' alt="user" />
-                    <h2>Profile</h2>
+                    <Link href="/user/profile">Profile</Link>
                 </span>
             </div>
 
             <div>
                 <span className="flex gap-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg">
                     <img src="/icons/askQuestion.svg" alt="ask question"/>
-                    <h2>Ask question</h2>
+                    <Link href="/askQuestion">Ask question</Link>
                 </span>
             </div>
 
             <div>
                 <span className="flex gap-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg">
                     <img src="/icons/settings.svg" alt="settings icon"/>
-                    <h2>Settings</h2>
+                    <Link href="/settings">Settings</Link>
                 </span>
             </div>
         </div>
