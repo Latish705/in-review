@@ -8,6 +8,6 @@ answerRoutes.route("/getAnswersFor").get(getAllAnswers);
 
 answerRoutes.route("/submitAnswer").post(userAnswer);
 
-answerRoutes.route("/upvote");
+answerRoutes.route("/upvoteAnswer").post();
 
 export default answerRoutes;
