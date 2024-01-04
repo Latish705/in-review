@@ -16,7 +16,7 @@ export default function ResponsesPage(params) {
             setAnswersArray(responseArray);
         }
 
-        fillAnswersArray();
+        fillAnswersArray(questionId);
     },[])
 
     return (
