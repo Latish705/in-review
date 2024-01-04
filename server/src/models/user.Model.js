@@ -23,9 +23,11 @@ const UserSchema = new mongoose.Schema({
       end: { type: Number, required: true },
     },
   },
-  bookmarks: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
+  bookmarks: [
+    { type: mongoose.Schema.Types.ObjectId, ref: "Question", default: 0 },
+  ],
   branch: { type: String, required: true },
-  post: { type: String, required: null },
+  post: { type: String },
   cgpa: { type: Number, required: true },
   accessToken: { type: String },
 });

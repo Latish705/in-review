@@ -1,9 +1,9 @@
-import { User } from "../models/userModel.js";
-import { ApiError } from "../utils/ApiError.js";
+import { User } from "../models/user.Model.js";
+import ApiError from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/AsyncHandler.js";
 import jwt from "jsonwebtoken";
-import uploadToCloudinary from "../utils/cloudinary.js";
+import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 
 const generateAccessandRefreshToken = async (userId) => {
   const user = User.findOne({ userId });
@@ -21,9 +21,12 @@ export const registerUser = asyncHandler(async (req, res) => {
   //if not then we will upload the avatar sent by user (using multer)
   // will hash the password
   //then if there is not other error then we will save the user in database and send response of success
-  const { username, email, password, fullName } = req.body;
+  // const { username, email, password, college, cgpa, branch } = req.body;
+  console.log(username, email, password, college, cgpa, branch);
   if (
-    [fullName, username, password, email].some((field) => field.trim() === "")
+    [username, password, email, cgpa, branch].some(
+      (field) => field.trim() === ""
+    )
   ) {
     throw new ApiError(400, "All fields are required");
   }
@@ -36,22 +39,24 @@ export const registerUser = asyncHandler(async (req, res) => {
     throw new ApiError(400, "User with email or username already exists");
   }
 
-  const avatarLocalPath = req.files?.avatar[0]?.path;
+  // const avatarLocalPath = req.files?.avatar[0]?.path;
 
-  const avatar = await uploadToCloudinary(avatarLocalPath);
-  console.log(avatar.url);
-  const coverImageLocalPath = req.files?.coverImage[0]?.path;
+  // const avatar = await uploadToCloudinary(avatarLocalPath);
+  // console.log(avatar.url);
+  // const coverImageLocalPath = req.files?.coverImage[0]?.path;
 
-  const coverImage = await uploadToCloudinary(coverImageLocalPath);
-  console.log(coverImage.url);
+  // const coverImage = await uploadToCloudinary(coverImageLocalPath);
+  // console.log(coverImage.url);
 
   const user = User.create({
     username,
     email,
     password,
-    fullName,
-    avatar: avatar.url,
-    coverImage: coverImage.url,
+    college,
+    cgpa,
+    branch,
+    // avatar: avatar.url,
+    // coverImage: coverImage.url,
   });
 
   const loggedInUser = await User.findById(user._id).select(
