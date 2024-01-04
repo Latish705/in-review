@@ -1,12 +1,22 @@
 
 
-export default function AnswerInterface(answer, upvotes, downvotes) {
+
+export default function AnswerInterface(answer, upvotes, downvotes, id) {
+
+    const handleUpvote = (id)=>{
+        
+    }
+
+    constHandleDownvote = (id)=> {
+
+    }
+
     return (
         <section className="border-b cursor-pointer hover:bg-gray-50 pt-10">
 
         <main className="mb-4 mx-2">
             <div>
-                <p>{description}</p>
+                <p>{answer}</p>
                 <span className="text-blue-500 cursor-pointer hover:underline">
                 </span>
             </div>
@@ -17,12 +27,12 @@ export default function AnswerInterface(answer, upvotes, downvotes) {
                 <div className="flex gap-2">
                     <span className="flex gap-1">
                         <img src="/icons/upvote.svg" alt="up"/>
-                        <p>{upvotes}</p>
+                        <button onClick={()=>{handleUpvote}}>{upvotes}</button>
                     </span>
 
                     <span className="flex gap-1">
                         <img src="/icons/downvote.svg" alt="down"/>
-                        <p>{downvotes}</p>
+                        <button onClick={()=>{handleDownvote}}>{downvotes}</button>
                     </span>
                 </div>
             </div>
