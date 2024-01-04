@@ -1,7 +1,7 @@
 import asyncHandler from "../utils/AsyncHandler.js";
 import { Question } from "../models/Question.Model.js";
 import { College } from "../models/College.Model.js";
-import {User} from "./../models/user.Model.js"
+import { User } from "./../models/user.Model.js";
 const userQuestion = asyncHandler(async (req, res) => {
   try {
     const { collegeId, question, hashtags } = req.body;
@@ -30,7 +30,7 @@ const userQuestion = asyncHandler(async (req, res) => {
   }
 });
 
-const getAllQuestionsForCollege = asyncHandler(async (req, res) => {
+export const getAllQuestionsForCollege = asyncHandler(async (req, res) => {
   const { collegeId } = req.params;
 
   const questions = await Question.find({ college: collegeId }).populate(
@@ -41,7 +41,7 @@ const getAllQuestionsForCollege = asyncHandler(async (req, res) => {
   res.json(questions);
 });
 
-const getQuestionByIdForCollege = asyncHandler(async (req, res) => {
+export const getQuestionByIdForCollege = asyncHandler(async (req, res) => {
   const { collegeId, questionId } = req.params;
 
   const question = await Question.findOne({
@@ -57,19 +57,18 @@ const getQuestionByIdForCollege = asyncHandler(async (req, res) => {
   }
 });
 
-const bookmarkQuestion = asyncHandler(async (req, res) => {
+export const bookmarkQuestion = asyncHandler(async (req, res) => {
   const { questionId } = req.params;
 
   try {
     const bookmarkedQuestion = await Question.findOne({
-      _id: questionId
+      _id: questionId,
     });
 
     if (!bookmarkedQuestion) {
       return res.status(404).json({ error: "Question not found" });
     }
 
-  
     const user = await User.findById(req.user.id);
 
     if (!user) {
@@ -81,7 +80,6 @@ const bookmarkQuestion = asyncHandler(async (req, res) => {
     }
     user.bookmarks.push(questionId);
 
-  
     await user.save();
 
     res.status(200).json({ message: "Question bookmarked successfully" });
@@ -93,13 +91,12 @@ const bookmarkQuestion = asyncHandler(async (req, res) => {
 
 const getAllBookmarkedQuestions = asyncHandler(async (req, res) => {
   try {
-    const userId = req.user.id; 
+    const userId = req.user.id;
 
-   
-    const user = await User.findById(userId).populate('bookmarks', 'question');
+    const user = await User.findById(userId).populate("bookmarks", "question");
 
     if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      return res.status(404).json({ error: "User not found" });
     }
 
     const bookmarkedQuestions = user.bookmarks;
@@ -107,28 +104,26 @@ const getAllBookmarkedQuestions = asyncHandler(async (req, res) => {
     res.status(200).json({ bookmarkedQuestions });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 
-
-const upvoteQuestion = asyncHandler(async (req, res) => {
+export const upvoteQuestion = asyncHandler(async (req, res) => {
   const { questionId } = req.params;
   const updatedQuestion = await Question.findByIdAndUpdate(
     questionId,
-    {$inc:{upvotes:1}},
-    {new:true}
+    { $inc: { upvotes: 1 } },
+    { new: true }
   );
 
   res.json(updatedQuestion);
 });
 
-const downvoteQuestion=asyncHandler(async(req,res)=>{
-  const {questionId}=req.params;
-  const updatedQuestion=await Question.findByIdAndUpdate(
+const downvoteQuestion = asyncHandler(async (req, res) => {
+  const { questionId } = req.params;
+  const updatedQuestion = await Question.findByIdAndUpdate(
     questionId,
-    {$inc:{downvotes:1}},
-    {new:true}
-  )
-})
-
+    { $inc: { downvotes: 1 } },
+    { new: true }
+  );
+});
