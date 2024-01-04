@@ -6,9 +6,9 @@ import jwt from "jsonwebtoken";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 
 const generateAccessandRefreshToken = async (userId) => {
-  const user = User.findOne({ userId });
-  const accessToken = user.generateAccessToken();
-  const refreshToken = user.generateRefreshToken();
+  const user = await User.findById(userId._id);
+  const accessToken = await user.generateAccessToken();
+  const refreshToken = await user.generateRefreshToken();
   user.refreshToken = refreshToken;
   await user.save({ validateBeforeSave: false });
 
@@ -21,7 +21,7 @@ export const registerUser = asyncHandler(async (req, res) => {
   //if not then we will upload the avatar sent by user (using multer)
   // will hash the password
   //then if there is not other error then we will save the user in database and send response of success
-  // const { username, email, password, college, cgpa, branch } = req.body;
+  const { username, email, password, college, cgpa, branch } = req.body;
   console.log(username, email, password, college, cgpa, branch);
   if (
     [username, password, email, cgpa, branch].some(
@@ -78,7 +78,8 @@ export const registerUser = asyncHandler(async (req, res) => {
 
 export const loginUser = asyncHandler(async (req, res) => {
   const { email, username, password } = req.body;
-  if ([email, username, password].some((fields) => fields.trim() === "")) {
+  console.log(email, username, password);
+  if ([email, username].some((fields) => fields.trim() === "")) {
     throw new ApiError(400, "All fields are required");
   }
 
