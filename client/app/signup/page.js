@@ -26,15 +26,36 @@ const SignupForm = () => {
         const { name, value } = e.target;
 
         setInfo((prev) => {
-            if (name.startsWith("college.")) {
-                const collegeField = name.split(".")[1];
+            if (name === "college.name") {
                 return {
                     ...prev,
                     college: {
                         ...prev.college,
-                        [collegeField]: value,
+                        name: value,
                     },
                 };
+            } else if (name === "college.duration.start") {
+                return {
+                    ...prev,
+                    college: {
+                        ...prev.college,
+                        duration: {
+                            ...prev.college.duration,
+                            start: value
+                        }
+                    }
+                }
+            } else if (name === "college.duration.end") {
+                return {
+                    ...prev,
+                    college: {
+                        ...prev.college,
+                        duration: {
+                            ...prev.college.duration,
+                            end: value
+                        }
+                    }
+                }
             } else {
                 return {
                     ...prev,
@@ -44,10 +65,10 @@ const SignupForm = () => {
         })  
     }
 
-    const handleSignup = async (e) => {
-        e.preventDefault()
+    const handleSignup = async (info) => {
         try {
             const response = await userSignup(info);
+            console.log(info)
             if (response === true) {
                 alert( "userSignupSuccesfull" );
                 router.push('/home')
@@ -165,7 +186,7 @@ const SignupForm = () => {
                     </div>
                     <button
                         type="button"
-                        onClick={handleSignup}
+                        onClick={()=>{handleSignup(info)}}
                         className="bg-footer text-white px-4 py-2 rounded hover:bg-teal-900"
                     >
                         Signup

@@ -44,10 +44,17 @@ export async function upvoteQuestion(questionId) {
 
 export async function downVoteQuestion (questionId) {
     try {
-        const response = await axios.get('...api for downvote', questionId)
+        const response = await axios.post('...api for downvote', questionId)
         return (response.data.updatedQuestion);
     } catch (error) {
         throw new Error (error);
     }
 }
 
+export async function getQuestionDetail (questionId) {
+    try {
+
+    } catch (error) {
+        throw new Error (error);
+    }
+}
