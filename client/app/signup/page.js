@@ -1,18 +1,62 @@
 'use client'
+
 import React, { useState } from 'react';
+import { userSignup } from '@/app/lib/actions';
+import { useRouter } from 'next/navigation';
 
 const SignupForm = () => {
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [college, setCollege] = useState('');
-    const [cgpa, setCGPA] = useState('');
-    const [branch, setBranch] = useState('');
+    const router = useRouter();
 
-    const handleSignup = (e) => {
+    const [info, setInfo] = useState({
+        username: '',
+        email: '',
+        password: '',
+        college: {
+            name: '',
+            duration: {
+                start: '',
+                end: '',
+            },
+        },
+        cgpa: '',
+        branch: ''
+    })
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        setInfo((prev) => {
+            if (name.startsWith("college.")) {
+                const collegeField = name.split(".")[1];
+                return {
+                    ...prev,
+                    college: {
+                        ...prev.college,
+                        [collegeField]: value,
+                    },
+                };
+            } else {
+                return {
+                    ...prev,
+                    [name]: value,
+                };
+            }
+        })  
+    }
+
+    const handleSignup = async (e) => {
         e.preventDefault()
-        // signup logic to be added
-        console.log('Signing up with:', { username, email, password, college, cgpa, branch });
+        try {
+            const response = await userSignup(info);
+            if (response === true) {
+                alert( "userSignupSuccesfull" );
+                router.push('/home')
+            }
+
+        } catch (error) {
+            alert('unalbe to signup, please recheck all the info filled');
+            console.log(error);
+        }
     };
 
     return (
@@ -26,8 +70,8 @@ const SignupForm = () => {
                             type="text"
                             id="username"
                             name="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            value={info.username}
+                            onChange={handleChange}
                             className="w-full p-2 border rounded"
                         />
                     </div>
@@ -37,8 +81,8 @@ const SignupForm = () => {
                             type="email"
                             id="email"
                             name="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={info.email}
+                            onChange={handleChange}
                             className="w-full p-2 border rounded"
                         />
                     </div>
@@ -48,8 +92,8 @@ const SignupForm = () => {
                             type="password"
                             id="password"
                             name="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={info.password}
+                            onChange={handleChange}
                             className="w-full p-2 border rounded"
                         />
                     </div>
@@ -58,11 +102,44 @@ const SignupForm = () => {
                         <input
                             type="text"
                             id="college"
-                            name="college"
-                            value={college}
-                            onChange={(e) => setCollege(e.target.value)}
+                            name="college.name"
+                            value={info.college.name}
+                            onChange={handleChange}
                             className="w-full p-2 border rounded"
                         />
+                    </div>
+                    <div>
+                        <label htmlFor="startYear" className="block text-gray-700">Start Year:</label>
+                        <select
+                            id="startYear"
+                            name="college.duration.start"
+                            value={info.college.duration.start}
+                            onChange={handleChange}
+                            className="w-full p-2 border rounded"
+                        >
+                            <option value="">Select Year</option>
+                            {/* Add the options for start years dynamically */}
+                            {Array.from({ length: 10 }, (_, index) => (
+                                <option key={index} value={2022 + index}>{2022 + index}</option>
+                            ))}
+                        </select>
+                    </div>
+                    
+                    <div className="mb-4">
+                        <label htmlFor="endYear" className="block text-gray-700">End Year:</label>
+                        <select
+                            id="endYear"
+                            name="college.duration.end"
+                            value={info.college.duration.end}
+                            onChange={handleChange}
+                            className="w-full p-2 border rounded"
+                        >
+                            <option value="">Select Year</option>
+                            {/* Add the options for end years dynamically */}
+                            {Array.from({ length: 10 }, (_, index) => (
+                                <option key={index} value={2022 + index}>{2022 + index}</option>
+                            ))}
+                        </select>
                     </div>
                     <div className="mb-4">
                         <label htmlFor="cgpa" className="block text-gray-700">CGPA:</label>
@@ -70,8 +147,8 @@ const SignupForm = () => {
                             type="text"
                             id="cgpa"
                             name="cgpa"
-                            value={cgpa}
-                            onChange={(e) => setCGPA(e.target.value)}
+                            value={info.cgpa}
+                            onChange={handleChange}
                             className="w-full p-2 border rounded"
                         />
                     </div>
@@ -81,8 +158,8 @@ const SignupForm = () => {
                             type="text"
                             id="branch"
                             name="branch"
-                            value={branch}
-                            onChange={(e) => setBranch(e.target.value)}
+                            value={info.branch}
+                            onChange={handleChange}
                             className="w-full p-2 border rounded"
                         />
                     </div>
