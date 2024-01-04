@@ -36,7 +36,10 @@ export async function getQuestion(collegeId) {
     // correct the api
     // check that the return format is correct
 
-    const response = await axios.get(".../getAllQuestionForCollege", collegeId);
+    const response = await axios.get(
+      "http://localhost:8080/api/v1/get-all-question-college",
+      collegeId
+    );
 
     return { questions: response.data.questions };
   } catch (error) {
@@ -46,7 +49,10 @@ export async function getQuestion(collegeId) {
 
 export async function upvoteQuestion(questionId) {
   try {
-    const response = await axios.post("....api to upvote", questionId);
+    const response = await axios.post(
+      "http://localhost:8080/api/v1/upvote-question",
+      questionId
+    );
 
     return response.data.updatedQuestion;
   } catch (error) {
@@ -56,7 +62,10 @@ export async function upvoteQuestion(questionId) {
 
 export async function downVoteQuestion(questionId) {
   try {
-    const response = await axios.post("...api for downvote", questionId);
+    const response = await axios.post(
+      "http://localhost:8080/api/v1/downvote-question",
+      questionId
+    );
     return response.data.updatedQuestion;
   } catch (error) {
     throw new Error(error);
@@ -65,10 +74,6 @@ export async function downVoteQuestion(questionId) {
 
 export async function getResponses(quesitonId) {
   try {
-    const response = await axios.get("...route to get answers", quesitonId);
-
-    return response.data.answers;
-  } catch (error) {
-    throw new Error(error);
-  }
+    // const response = await axios
+  } catch (e) {}
 }
