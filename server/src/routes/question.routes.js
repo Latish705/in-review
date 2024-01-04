@@ -7,24 +7,22 @@ import {
   getAllQuestionsForCollege,
   getQuestionByIdForCollege,
 } from "../controllers/questionController.js";
-import { verifyToken } from "../middlewares/authMiddleware.js";
+// import { verifyToken } from "../middlewares/authMiddleware.js";
 
 const questionRoutes = Router();
 
-questionRoutes.route("/ask-question").post(verifyToken, userQuestion);
+questionRoutes.route("/ask-question").post(userQuestion);
 
-questionRoutes.route("/upvote-question").post(verifyToken, upvoteQuestion);
+questionRoutes.route("/upvote-question").post(upvoteQuestion);
 
-questionRoutes.route("/downvote-question").post(verifyToken, downvoteQuestion);
+questionRoutes.route("/downvote-question").post(downvoteQuestion);
 
-questionRoutes.route("/bookmark-question").post(verifyToken, bookmarkQuestion);
+questionRoutes.route("/bookmark-question").post(bookmarkQuestion);
 
 questionRoutes
   .route("/get-all-question-college")
-  .post(verifyToken, getAllQuestionsForCollege);
+  .post(getAllQuestionsForCollege);
 
-questionRoutes
-  .route("/get-question-byId")
-  .post(verifyToken, getQuestionByIdForCollege);
+questionRoutes.route("/get-question-byId").post(getQuestionByIdForCollege);
 
 export default questionRoutes;

@@ -1,19 +1,19 @@
 import { asyncHandler } from "../utils/AsyncHandler.js";
 import { College } from "../models/College.Model.js";
 import { User } from "./../models/user.Model.js";
-import { Question } from "./../models/Question.Model.js"
+import { Question } from "./../models/Question.Model.js";
 
 export const userQuestion = asyncHandler(async (req, res) => {
   try {
     const { collegeId, question, hashtags } = req.body;
-    const { user } = req.user;
-    const { description } = req;
+    const { userId } = req.body;
+    const { description } = req.body;
 
     const newQuestion = new Question({
       college: collegeId,
       question,
       hashtags,
-      user: user._id,
+      user: userId,
       description,
     });
     await newQuestion.save();
