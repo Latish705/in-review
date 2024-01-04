@@ -2,15 +2,15 @@
 export default function QuestionInterface({title, description, upvotes, downvotes, name, profilePicture}) {
     
     return (
-        <section className="border-b cursor-pointer hover:bg-gray-50">
-            <header>
+        <section className="border-b cursor-pointer hover:bg-gray-50 pt-10">
+            <header className="ml-1">
                 <div>
                     <img src="" alt="" />
                     <div>{name}</div>
                 </div>
             </header>
 
-            <main>
+            <main className="mb-4 mx-2">
                 <div>
                     <p className={`font-[700] text-xl`}>
                         {title}

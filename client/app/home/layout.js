@@ -1,15 +1,26 @@
 import Sidenav from "../ui/sidenav";
 import TopBar from "../ui/home/topBar";
+import SearchBar from "../ui/searchBar";
 
 export default function Layout ({ children }) {
     return (
-        <div>
-            <div>
+        <div className="flex justify-center overflow-hidden h-screen gap-8">
+            <div className="p-4 my-4">
                 <Sidenav/>
             </div>
-            <div>
-                <div><TopBar/></div>
-                {children}
+
+            <main className="pt-0 border-l border-r min-w-[600px] max-w-[600px] relative">
+                <div className="bg-transparent backdrop-blue-sm">
+                    <TopBar/>
+                </div>
+
+                <div className="overflow-y-auto h-full pb-44 ml-6 mr-2">
+                    {children}
+                </div>
+            </main>
+            
+            <div className="my-4">
+                <SearchBar/>
             </div>
         </div>
     )
