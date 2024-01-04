@@ -1,7 +1,7 @@
 import { asyncHandler } from "../utils/AsyncHandler.js";
-
 import { College } from "../models/College.Model.js";
 import { User } from "./../models/user.Model.js";
+import { Question } from "./../models/Question.Model.js"
 export const userQuestion = asyncHandler(async (req, res) => {
   try {
     const { collegeId, question, hashtags } = req.body;
@@ -109,7 +109,7 @@ const getAllBookmarkedQuestions = asyncHandler(async (req, res) => {
 });
 
 export const upvoteQuestion = asyncHandler(async (req, res) => {
-  const { questionId } = req.params;
+  const { questionId } = req.body.questionId;
   const updatedQuestion = await Question.findByIdAndUpdate(
     questionId,
     { $inc: { upvotes: 1 } },
@@ -119,7 +119,7 @@ export const upvoteQuestion = asyncHandler(async (req, res) => {
   res.json(updatedQuestion);
 });
 
-const downvoteQuestion = asyncHandler(async (req, res) => {
+export const downvoteQuestion = asyncHandler(async (req, res) => {
   const { questionId } = req.params;
   const updatedQuestion = await Question.findByIdAndUpdate(
     questionId,

@@ -19,11 +19,35 @@ export  async function userLogin () {
     return true
 }
 
-export async function getQuestion () {
+export async function getQuestion (collegeId) {
     try {
-        const response = await axios.get('.../getAllQuestionForCollege', );
+        // correct the api
+        // check that the return format is correct
 
-    } catch {
-
+        const response = await axios.get('.../getAllQuestionForCollege', collegeId );
+        
+        return {questions: response.data.questions}
+    } catch (error) {
+        throw new Error(error);
     }
 }
+
+export async function upvoteQuestion(questionId) {
+    try {
+        const response = await axios.post('....api to upvote', questionId);
+
+        return(response.data.updatedQuestion);
+    } catch (error) {
+        throw new Error(error);
+    }
+}
+
+export async function downVoteQuestion (questionId) {
+    try {
+        const response = await axios.get('...api for downvote', questionId)
+        return (response.data.updatedQuestion);
+    } catch (error) {
+        throw new Error (error);
+    }
+}
+
