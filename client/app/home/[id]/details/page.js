@@ -1,36 +1,37 @@
-'use client';
+"use client";
 
-import React from 'react';
+import React from "react";
 import AnswerInterface from "@/app/ui/home/answerInterface";
 import { getResponses } from "@/app/lib/actions";
+import { useParams } from "next/navigation";
 
-export default function ResponsesPage(params) {
-    
-    const questionId = params.id;
-    const [answersArray, setAnswersArray] = React.useState([]);
+export default function ResponsesPage() {
+  const params = useParams();
+  const questionId = params.id;
+  const [answersArray, setAnswersArray] = React.useState([]);
+  console.log(questionId);
+  React.useEffect(() => {
+    const fillAnswersArray = async (Id) => {
+      const responseArray = await getResponses(Id);
 
-    React.useEffect(()=>{
-        const fillAnswersArray = async (Id) => {
-            const responseArray = await getResponses(Id);
-            console.log(responseArray);
-            setAnswersArray(responseArray);
-        }
+      console.log(responseArray);
+      setAnswersArray(responseArray);
+    };
 
-        fillAnswersArray(questionId);
-    },[])
+    fillAnswersArray(questionId);
+    console.log(answersArray);
+  }, []);
 
-    return (
-        <div>
-            {
-                answersArray &&
-                answersArray.map((thisAnswer) => (
-                    <AnswerInterface
-                        answer={thisAnswer.answer}
-                        upvotes={thisAnswer.answer}
-                        downvotes={thisAnswer.answer}
-                    />
-                ))
-            }
-        </div>
-    )
+  return (
+    <div>
+      {Array.isArray(answersArray) &&
+        answersArray.map((thisAnswer) => (
+          <AnswerInterface
+            answer={thisAnswer.answer}
+            upvotes={thisAnswer.upvotes}
+            downvotes={thisAnswer.downvotes}
+          />
+        ))}
+    </div>
+  );
 }

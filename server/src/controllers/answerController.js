@@ -25,7 +25,7 @@ export const userAnswer = asyncHandler(async (req, res) => {
 
 export const getAllanswers = asyncHandler(async (req, res) => {
   const { questionId } = req.body;
-
+  console.log(questionId, req.body);
   const answers = await Answer.find({ answerOf: questionId });
   res.json(answers);
 });

@@ -9,7 +9,7 @@ import {
 
 const answerRoutes = Router();
 
-answerRoutes.route("/getAnswersFor").get(getAllanswers);
+answerRoutes.route("/getAnswersFor").post(getAllanswers);
 
 answerRoutes.route("/submitAnswer").post(userAnswer);
 

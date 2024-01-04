@@ -74,34 +74,40 @@ export async function downVoteQuestion(questionId) {
   }
 }
 
-export async function getResponses(quesitonId) {
+export async function getResponses(questionId) {
   try {
-    // const response = await axios
-  } catch (e) {}
-}
-
-export async function handleUpvote(answerId){
-  try {
-    const response=await axios.post(
-      "http://localhost:8080/api/v1/upvoteAnswer",
-      answerId
+    console.log(questionId);
+    const response = await axios.post(
+      "http://localhost:8080/api/v1/getAnswersFor",
+      { questionId }
     );
-    return response.data.updatedAnswer
-  } catch (error) {
-    throw new Error(error);
-    
+    console.log(response.data);
+    return response.data;
+  } catch (e) {
+    console.log(e);
   }
 }
 
-export async function handleDownvote(answerId){
+export async function handleUpvote(answerId) {
   try {
-    const response=await axios.post(
+    const response = await axios.post(
+      "http://localhost:8080/api/v1/upvoteAnswer",
+      answerId
+    );
+    return response.data.updatedAnswer;
+  } catch (error) {
+    throw new Error(error);
+  }
+}
+
+export async function handleDownvote(answerId) {
+  try {
+    const response = await axios.post(
       "http://localhost:8080/api/v1/downvoteAnswer",
       answerId
     );
-    return response.data.updatedAnswer
+    return response.data.updatedAnswer;
   } catch (error) {
     throw new Error(error);
-    
   }
 }
