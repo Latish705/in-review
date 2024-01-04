@@ -5,6 +5,7 @@ import {
   logoutUser,
 } from "../controllers/authController.js";
 // import { upload } from "../middlewares/multerMiddleware.js";
+import { verifyToken } from "../middlewares/authMiddleware.js";
 
 const authRouter = Router();
 authRouter.route("/register").post(
@@ -19,6 +20,6 @@ authRouter.route("/register").post(
 
 authRouter.route("/login").post(loginUser);
 
-authRouter.route("/logout").post(logoutUser);
+authRouter.route("/logout").post(verifyToken, logoutUser);
 
 export default authRouter;
