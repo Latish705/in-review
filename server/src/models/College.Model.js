@@ -8,6 +8,4 @@ const CollegeSchema = new mongoose.Schema({
   reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
 });
 
-const College = mongoose.model("College", CollegeSchema);
-
-module.exports = College;
+export const College = mongoose.model("College", CollegeSchema);

@@ -5,7 +5,6 @@ import {
   bookmarkQuestion,
   getAllQuestionsForCollege,
   getQuestionByIdForCollege,
-  getQuestionByIdForCollege,
 } from "../controllers/questionController.js";
 import { verifyToken } from "../middlewares/authMiddleware.js";
 
