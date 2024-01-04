@@ -7,7 +7,6 @@ const useScroll = (threshold) => {
         const handleScroll = () => {
             const scrollY = window.scrollY || document.documentElement.scrollTop;
             setIsScrolled( scrollY > threshold );
-            console.log("scrolled")
         };
 
         window.addEventListener('scroll', handleScroll);
@@ -17,6 +16,8 @@ const useScroll = (threshold) => {
         };
 
     }, [threshold])
+
+    return isScrolled;
 }
 
 export default useScroll;
