@@ -1,3 +1,9 @@
-{/* 
-    localhost:3000/home/[questionID]/details
-*/}
+
+
+export default function Home() {
+    return(
+        <div>
+            Home page here
+        </div>
+    )
+}
