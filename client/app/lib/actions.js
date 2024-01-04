@@ -18,3 +18,12 @@ export  async function userLogin () {
     // if success returns true 
     return true
 }
+
+export async function getQuestion () {
+    try {
+        const response = await axios.get('.../getAllQuestionForCollege', );
+
+    } catch {
+
+    }
+}
