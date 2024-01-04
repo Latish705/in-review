@@ -33,7 +33,7 @@ const collegeList = () =>
     ];
 
     const colleges = list.map((college) => (
-        <div key={college.name}>
+        <div key={college.alt}>
             <img src={college.src} alt={college.alt} className="max-h-[130px]"/>
         </div>
     ))
