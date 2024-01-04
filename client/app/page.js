@@ -1,16 +1,25 @@
+'use client'
+import React from 'react';
 import { karma, inter } from './layout';
 import Navbar from '@/app/ui/navbar.js';
 import CollegeList from '@/app/ui/collegeList';
 import Footer from '@/app/ui/footer';
+import useScroll from '@/hooks/useScroll'
+import useElementHeight from '@/hooks/elementHeight';
 
 export default function Home() {
 
+  const [headerRef, headerHeight] = useElementHeight();
+  const isNavBarScrolled = useScroll(headerHeight);
+
   return (
     <main className="bg-slate-100">
-      <header className='relative top-0'>
-        <nav className='absolute'>
-          <Navbar/>
-        </nav>
+
+      <nav className={`scrolled fixed z-20 w-full ${isNavBarScrolled ? 'bg-footer': ''}`}>
+        <Navbar/>
+      </nav>
+
+      <header className='relative top-0' ref={headerRef}>
 
         <div className="relative top-0 left-0">
           <img src="/images/hero.png" alt="university image" className="w-screen"/>
