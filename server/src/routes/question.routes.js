@@ -28,3 +28,5 @@ questionRoutes
 questionRoutes
   .route("/get-question-byId")
   .post(verifyToken, getQuestionByIdForCollege);
+
+export default questionRoutes;

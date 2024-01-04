@@ -4,6 +4,7 @@ import cors from "cors";
 import authRouter from "./routes/auth.routes.js";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import questionRoutes from "./routes/question.routes.js";
 
 dotenv.config({
   path: "./.env",
@@ -18,7 +19,13 @@ app.use(express.urlencoded({ extended: true, limit: "16kb" }));
 app.use(express.static("public"));
 app.use(cookieParser());
 
-//routes
+// auth routes
 app.use("/api/v1/auth", authRouter);
+
+//question routes
+app.use("/api/v1", questionRoutes);
+
+// answer routes
+app.use("/api/v1");
 
 export default app;
