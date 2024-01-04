@@ -9,11 +9,14 @@ export const collegReq = asyncHandler(async (req, res) => {
   // rank: { type: Number },
   // courses: [{ type: String }],
   // reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
-
   const { name, category, courses } = req.body;
-  console.log(name, category, courses);
-  if ([name, category, courses].some((field) => field.trim() === "")) {
-    throw new ApiError(400, "All fields are required");
+
+  if (![name, category].every((field) => typeof field === 'string' && field.trim() !== '')) {
+    throw new ApiError(400, "Name and category are required");
+  }
+
+  if (!Array.isArray(courses) || courses.length === 0) {
+    throw new ApiError(400, "At least one course is required");
   }
 
   const existingCollege = await College.findOne({
@@ -21,16 +24,14 @@ export const collegReq = asyncHandler(async (req, res) => {
   });
 
   if (existingCollege) {
-    throw new ApiError(400, "User with email or username already exists");
+    throw new ApiError(400, "College with the same name or category already exists");
   }
 
-  const college = College.create({
+  const college = await College.create({
     name,
     category,
     courses,
   });
-
-  await College.save();
 
   res.status(201).json(college);
 });
