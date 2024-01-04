@@ -9,11 +9,36 @@ export const collegReq = asyncHandler(async (req, res) => {
   // rank: { type: Number },
   // courses: [{ type: String }],
   // reviews: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
-  try {
-    const college = new College(req.body);
-    await college.save();
-    res.status(201).json(college);
-  } catch (error) {
-    res.status(400).json(error);
-  }
+  
+    
+    const { name,category,courses} = req.body;
+    
+    if (
+      [name, category, courses].some(
+        (field) => field.trim() === ""
+      )
+    ) {
+      throw new ApiError(400, "All fields are required");
+    }
+  
+    const existingCollege = await College.findOne({
+      $or: [{ name }, { category }],
+    });
+  
+    if (existingCollege) {
+      throw new ApiError(400, "User with email or username already exists");
+    }
+  
+    
+  
+    const college = College.create({
+      name,
+      category,
+      courses,
+    });
+  
+  await college.save();
+
+  res.status(201).json(college);
+
 });
