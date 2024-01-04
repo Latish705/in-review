@@ -1,18 +1,32 @@
+'use client'
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import clsx from 'clsx';
 
 export default function Sidenav() {
+
+    const pathname = usePathname();
+
     return (
         <div className="text-lg flex flex-col gap-2">
             <div className="">
-                <span className="flex gap-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg"> 
+                <span className={clsx("flex gap-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg",
+                    {
+                        'bg-gray-200': pathname === '/home'
+                    }
+                )}> 
                     <img src="/icons/home.svg" alt='home'/>
                     <Link href="/home">Home</Link>
                 </span>
             </div>
 
             <div>
-                <span className="flex gap-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg">
+                <span className={clsx("flex gap-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg",
+                    {
+                        'bg-gray-200' : pathname === '/explore'
+                    }
+                )}>
                     <img src="/icons/search.svg" alt='explore'/>
                     <Link href="/explore">Explore</Link>
                 </span>
