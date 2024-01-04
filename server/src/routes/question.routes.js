@@ -6,7 +6,6 @@ import {
   bookmarkQuestion,
   getAllQuestionsForCollege,
   getQuestionByIdForCollege,
-  downvoteQuestion,
 } from "../controllers/questionController.js";
 import { verifyToken } from "../middlewares/authMiddleware.js";
 
@@ -16,9 +15,7 @@ questionRoutes.route("/ask-question").post(verifyToken, userQuestion);
 
 questionRoutes.route("/upvote-question").post(verifyToken, upvoteQuestion);
 
-questionRoutes
-  .route("/downvote-question")
-  .post(verifyToken, downvoteQuestion);
+questionRoutes.route("/downvote-question").post(verifyToken, downvoteQuestion);
 
 questionRoutes.route("/bookmark-question").post(verifyToken, bookmarkQuestion);
 
