@@ -27,3 +27,6 @@ span:hover .svg-icon {
     fill: white;
 }
 
+.scrolled {
+    transition: all 0.3s;
+}
