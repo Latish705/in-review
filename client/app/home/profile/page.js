@@ -5,15 +5,26 @@ import AnswerInterface from "@/app/ui/home/answerInterface";
 import QuestionInterface from "@/app/ui/home/questionInterface";
 import { useState, useEffect } from "react";
 export default function Profile() {
-  const [userInfo, setUserInfo] = useState("");
+  
+    const [userInfo, setUserInfo] = useState({
+        username: "",
+        college: "",
+        cgpa: "",
+    });
   const [userQuestions, setUserQuestion] = useState("");
-  const [userAnswers, setUserAnswers] = useState("");
+
+
   useEffect(() => {
     const fillUserInfo = async () => {
       const data = await getUserData();
-      console.log(data);
-      setUserInfo(data.user);
-      setUserQuestion(data.userQuestions);
+      console.log();
+      setUserInfo(()=> ({
+        username: data.user.username,
+        college: data.user.collge.name,
+        cgpa: data.user.cgpa
+      }));
+
+      setUserQuestion(userQuestions);
     };
     fillUserInfo();
   }, []);
@@ -23,7 +34,7 @@ export default function Profile() {
         <h1>Your information</h1>
         <div>{userInfo.username}</div>
         <div>{userInfo.college}</div>
-        <div>{userInfo.cgpa}</div>
+        <div><strong>CGPA: </strong>{userInfo.cgpa}</div>
       </header>
 
       <div>
