@@ -5,21 +5,20 @@ import { Question } from "./../models/Question.Model.js";
 
 export const userQuestion = asyncHandler(async (req, res) => {
   try {
-    const { collegeId, question, hashtags } = req.body;
-    const { userId } = req.body;
-    const { description } = req.body;
+    const { collegeId, question, hashtags, description } = req.body.question;
 
+    console.log(question);
     const newQuestion = new Question({
-      college: collegeId,
+      college: "6596df24d9194c31336a784a",
       question,
       hashtags,
-      user: userId,
+      user: "6596e198cc1152807d1d2991",
       description,
     });
     await newQuestion.save();
 
     await College.findByIdAndUpdate(
-      collegeId,
+      "6596df24d9194c31336a784a",
       { $push: { reviews: newQuestion._id } },
       { new: true }
     );
@@ -36,7 +35,8 @@ export const getAllQuestionsForCollege = asyncHandler(async (req, res) => {
   // console.log(collegeId);
 
   const questions = await Question.find({ college: collegeId });
-  // console.log(questions);
+  console.log(questions);
+  const reversequestions = questions.reverse();
   res.json(questions);
 });
 

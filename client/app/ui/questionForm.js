@@ -8,8 +8,8 @@ const askQuestion = () => {
   const router = useRouter();
 
   const [question, setQuestion] = React.useState({
-    title: "",
-    organization: "",
+    question: "",
+    collegeId: "",
     description: "",
     hashtags: "",
   });
@@ -29,8 +29,13 @@ const askQuestion = () => {
     // give a message alert of question getting submited successfully
     const response = await askUserQuestion(question);
     console.log(question);
-    alert("question submitted successfully!");
-    // router.push("/home");
+    if (response) {
+      alert("question submitted successfully!");
+      router.push("/home");
+    } else {
+      alert("Unable to send question please try again later");
+      router.push("/home");
+    }
   };
 
   return (
@@ -41,16 +46,16 @@ const askQuestion = () => {
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             htmlFor="title"
           >
-            Title
+            Question
           </label>
           <input
             className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
             type="text"
             placeholder="Enter your question to ask anonymous"
             id="title"
-            name="title"
+            name="question"
             onChange={handleChange}
-            value={question.title}
+            value={question.question}
           ></input>
           <p className="mt-1 text-xs text-gray-500">*This field is required</p>
         </div>
@@ -59,15 +64,15 @@ const askQuestion = () => {
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             htmlFor="organisation"
           >
-            Organisation
+            College
           </label>
           <input
             className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
             type="text"
             placeholder="Enter the organisation"
             id="organization"
-            name="organization"
-            value={question.organization}
+            name="collegeId"
+            value={question.collegeId}
             onChange={handleChange}
           ></input>
         </div>

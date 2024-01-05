@@ -125,16 +125,14 @@ export async function writeResponse(questionId, answer) {
   } catch (error) {}
 }
 
-export async function askUserQuestion(
-  collegeId,
-  question,
-  description,
-  hashtags
-) {
-  console.log(collegeId, question, description, hashtags);
+export async function askUserQuestion(question) {
+  console.log(question);
   const response = await axios.post(
-    "http://localhost:8080/api/v1/askQuestion",
-    { collegeId, question, description, hashtags }
+    "http://localhost:8080/api/v1/ask-question",
+    { question }
   );
-  console.log(response);
+  if (response) {
+    return true;
+  }
+  return false;
 }
