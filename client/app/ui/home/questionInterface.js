@@ -20,6 +20,9 @@ export default function QuestionInterface({
   //     const response = await writeResponse(id);
   //   };
 
+  const [upvotesState, setUpvoteState] = React.useState(userResponse.upvotes);
+  const [downvotesState, setDownvotesState] = React.useState(userResponse.downvotes);
+
   const handleKeyPress = async (event) => {
     console.log(id, userResponse);
     if (event.key === "Enter") {
@@ -33,11 +36,11 @@ export default function QuestionInterface({
   const handleUpvote = async (event) => {
     event.preventDefault();
     const responseOfUpvote = await upvoteQuestion(id);
-    upvotes += 1;
+    setUpvoteState(responseOfUpvote);
   };
   const handleDownvote = async (id) => {
     const responseOfDownvote = await downVoteQuestion(id);
-    downvotes += 1;
+    setDownvotesState(responseOfDownvote);
   };
 
   return (
@@ -67,12 +70,12 @@ export default function QuestionInterface({
           <div className="flex gap-2">
             <span className="flex gap-1" onClick={handleUpvote}>
               <img src="/icons/upvote.svg" alt="up" />
-              <p>{upvotes}</p>
+              <p>{upvotesState}</p>
             </span>
 
             <span className="flex gap-1" onClick={handleDownvote}>
               <img src="/icons/downvote.svg" alt="down" />
-              <p>{downvotes}</p>
+              <p>{downvotesState}</p>
             </span>
           </div>
           <div>
