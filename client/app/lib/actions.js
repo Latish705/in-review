@@ -51,12 +51,13 @@ export async function getQuestion(collegeId) {
 
 export async function upvoteQuestion(questionId) {
   try {
+    console.log(questionId);
     const response = await axios.post(
       "http://localhost:8080/api/v1/upvote-question",
-      questionId
+      { questionId }
     );
 
-    return response.data.updatedQuestion;
+    console.log(response);
   } catch (error) {
     throw new Error(error);
   }
@@ -110,4 +111,24 @@ export async function handleDownvote(answerId) {
   } catch (error) {
     throw new Error(error);
   }
+}
+
+export async function writeResponse(questionId, answer) {
+  try {
+    console.log(questionId, answer);
+    const response = await axios.post(
+      "http://localhost:8080/api/v1/submitAnswer",
+      { questionId, answer }
+    );
+    console.log(response);
+  } catch (error) {}
+}
+
+export async function askQuestion(collegeId, question, description, hashtags) {
+  console.log(collegeId, question, description, hashtags);
+  const response = await axios.post(
+    "http://localhost:8080/api/v1/askQuestion",
+    { collegeId, question, description, hashtags }
+  );
+  console.log(response);
 }

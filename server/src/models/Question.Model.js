@@ -4,7 +4,7 @@ const QuestionSchema = new mongoose.Schema({
   college: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "College",
-    required: true,
+    // required: true,
   },
   description: { type: String },
   question: { type: String, required: true },

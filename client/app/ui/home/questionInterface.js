@@ -1,26 +1,54 @@
 import Link from "next/link";
-import { upvoteQuestion, downVoteQuestion } from '@/app/lib/actions'
+import {
+  upvoteQuestion,
+  downVoteQuestion,
+  writeResponse,
+} from "@/app/lib/actions";
+import { useState } from "react";
 
-export default function QuestionInterface({title, id, description, upvotes, downvotes, name, profilePicture}) {
+export default function QuestionInterface({
+  title,
+  id,
+  description,
+  upvotes,
+  downvotes,
+  name,
+  profilePicture,
+}) {
+  const [userResponse, setUserResponse] = useState("");
+  //   const writeResponse = async (id) => {
+  //     const response = await writeResponse(id);
+  //   };
 
-    const handleUpvote = async (id) => {
-        const responseOfUpvote = await upvoteQuestion (id)
-        upvotes++;
+  const handleKeyPress = async (event) => {
+    console.log(id, userResponse);
+    if (event.key === "Enter") {
+      const response = await writeResponse(id, userResponse);
+      console.log(response);
+      console.log("Enter key pressed");
+      // You can call a function or set a state, etc.
     }
-    const handleDownvote = async (id) => {
-        const responseOfDownvote = await downVoteQuestion(id);
-        downvotes++;
-    }
-    
-    return (
-        <section className="border-b cursor-pointer hover:bg-gray-50 pt-10">
-            <Link href={`/home/${id}/details`}>
-            <header className="ml-1">
-                <div>
-                    <img src="" alt="" />
-                    <div>{name}</div>
-                </div>
-            </header>
+  };
+
+  const handleUpvote = async (event) => {
+    event.preventDefault();
+    const responseOfUpvote = await upvoteQuestion(id);
+    upvotes += 1;
+  };
+  const handleDownvote = async (id) => {
+    const responseOfDownvote = await downVoteQuestion(id);
+    downvotes += 1;
+  };
+
+  return (
+    <section className="border-b cursor-pointer hover:bg-gray-50 pt-10">
+      <Link href={`/home/${id}/details`}>
+        <header className="ml-1">
+          <div>
+            <img src="" alt="" />
+            <div>{name}</div>
+          </div>
+        </header>
 
         <main className="mb-4 mx-2">
           <div>
@@ -37,12 +65,12 @@ export default function QuestionInterface({title, id, description, upvotes, down
           {" "}
           {/* (upvote downvote) (response) */}
           <div className="flex gap-2">
-            <span className="flex gap-1">
+            <span className="flex gap-1" onClick={handleUpvote}>
               <img src="/icons/upvote.svg" alt="up" />
               <p>{upvotes}</p>
             </span>
 
-            <span className="flex gap-1">
+            <span className="flex gap-1" onClick={handleDownvote}>
               <img src="/icons/downvote.svg" alt="down" />
               <p>{downvotes}</p>
             </span>
@@ -51,6 +79,9 @@ export default function QuestionInterface({title, id, description, upvotes, down
             <input
               className="bg-gray-200 text-black rounded-3xl p-2 px-3"
               placeholder="your response..."
+              value={userResponse}
+              onChange={(e) => setUserResponse(e.target.value)}
+              onKeyDown={handleKeyPress}
             />
           </div>
         </div>

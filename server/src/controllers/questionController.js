@@ -107,13 +107,14 @@ const getAllBookmarkedQuestions = asyncHandler(async (req, res) => {
 });
 
 export const upvoteQuestion = asyncHandler(async (req, res) => {
-  const { questionId } = req.body.questionId;
+  const { questionId } = req.body;
+  console.log(questionId);
   const updatedQuestion = await Question.findByIdAndUpdate(
     questionId,
     { $inc: { upvotes: 1 } },
     { new: true }
   );
-
+  console.log(updatedQuestion);
   res.json(updatedQuestion);
 });
 
