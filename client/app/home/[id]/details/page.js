@@ -12,13 +12,12 @@ export default function ResponsesPage(request) {
 
   const questionId = params.id;
 
-  const title = searchParams.get("title");
-  const description = searchParams.get("description");
-  const upvotes = searchParams.get("upvotes");
-  const downvotes = searchParams.get("downvotes");
-  const name = searchParams.get("name");
-  console.log(upvotes);
-  console.log(downvotes);
+  const title = searchParams.get('title');
+  const description = searchParams.get('description');
+  const upvotes = searchParams.get('upvotes');
+  const downvotes = searchParams.get('downvotes');
+  console.log(upvotes)
+  console.log(downvotes)
 
   const [answersArray, setAnswersArray] = React.useState([]);
 
@@ -36,8 +35,8 @@ export default function ResponsesPage(request) {
     <div>
       <div>
         <QuestionInterface
-          name="anonymous"
-          title={title}
+          name = "Anonymous"
+          title= {title}
           description={description}
           upvotes={upvotes}
           downvotes={downvotes}
