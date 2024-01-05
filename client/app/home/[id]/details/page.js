@@ -2,14 +2,28 @@
 
 import React from "react";
 import AnswerInterface from "@/app/ui/home/answerInterface";
+import QuestionInterface from "@/app/ui/home/questionInterface";
 import { getResponses } from "@/app/lib/actions";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
-export default function ResponsesPage() {
+
+export default function ResponsesPage(request) {
+  
   const params = useParams();
+  const searchParams = useSearchParams();
+
   const questionId = params.id;
+
+  const title = searchParams.get('title');
+  const description = searchParams.get('description');
+  const upvotes = searchParams.get('upvotes');
+  const downvotes = searchParams.get('downvotes');
+  const name = searchParams.get('name')
+  console.log(upvotes)
+  console.log(downvotes)
+
   const [answersArray, setAnswersArray] = React.useState([]);
-  console.log(questionId);
+  
   React.useEffect(() => {
     const fillAnswersArray = async (Id) => {
       const responseArray = await getResponses(Id);
@@ -17,14 +31,22 @@ export default function ResponsesPage() {
       console.log(responseArray);
       setAnswersArray(responseArray);
     };
-
     fillAnswersArray(questionId);
-    console.log(answersArray);
   }, []);
 
   return (
     <div>
-      {answersArray &&
+
+      <div>
+        <QuestionInterface
+          name = {name}
+          title= {title}
+          description={description}
+          upvotes={upvotes}
+          downvotes={downvotes}
+        />
+      </div>
+      {answersArray ?
         answersArray.map((thisAnswer) => (
           <AnswerInterface
             key={thisAnswer.upvotes}
@@ -33,7 +55,13 @@ export default function ResponsesPage() {
             downvotes={thisAnswer.downvotes}
             id={thisAnswer._id}
           />
-        ))}
+        )) : 
+          <div className="text-xl mt-10">
+            <p className="font-bold">{"Hmm!"}</p>
+            <p>{"This field is empty :/"}</p>
+            <p>{"give response and help student :)"}</p>
+          </div>
+        }
     </div>
   );
 }
