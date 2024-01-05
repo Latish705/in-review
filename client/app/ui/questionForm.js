@@ -2,6 +2,7 @@
 import React from "react";
 import { useRouter } from "next/navigation";
 import { writeResponse } from "../lib/actions";
+import { askUserQuestion } from "../lib/actions";
 
 const askQuestion = () => {
   const router = useRouter();
@@ -21,12 +22,12 @@ const askQuestion = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // action for question submission
     // if question submitted successfully then navigate to home page
     // give a message alert of question getting submited successfully
-    // const response = writeResponse(question);
+    const response = await askUserQuestion(question);
     console.log(question);
     alert("question submitted successfully!");
     // router.push("/home");
