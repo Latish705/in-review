@@ -49,7 +49,7 @@ export default function Sidenav() {
             <div>
                 <span className="flex gap-1 hover:bg-gray-200 p-2 cursor-pointer rounded-lg">
                     <img src='/icons/profile.svg' alt="user" />
-                    <Link href="/user/profile">Profile</Link>
+                    <Link href="/home/profile">Profile</Link>
                 </span>
             </div>
 
