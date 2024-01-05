@@ -21,10 +21,8 @@ export default function QuestionInterface({
   //     const response = await writeResponse(id);
   //   };
 
-  const [upvotesState, setUpvoteState] = React.useState(userResponse.upvotes);
-  const [downvotesState, setDownvotesState] = React.useState(
-    userResponse.downvotes
-  );
+  const [upvotesState, setUpvoteState] = React.useState(upvotes);
+  const [downvotesState, setDownvotesState] = React.useState(downvotes);
 
   const handleKeyPress = async (event) => {
     console.log(id, userResponse);
