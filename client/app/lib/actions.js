@@ -136,3 +136,16 @@ export async function askUserQuestion(question) {
   }
   return false;
 }
+
+export async function getUserData() {
+  try {
+    // console.log(id);
+    console.log("hello");
+    const response = await axios.post(
+      "http://localhost:8080/api/v1/auth/getUserData",
+      { userId: "6596e198cc1152807d1d2991" }
+    );
+    console.log(response.data);
+    return response.data;
+  } catch (error) {}
+}

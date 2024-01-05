@@ -5,6 +5,7 @@ import { asyncHandler } from "../utils/AsyncHandler.js";
 import jwt from "jsonwebtoken";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 import { Question } from "../models/Question.Model.js";
+import { Answer } from "../models/Answers.Model.js";
 
 const generateAccessandRefreshToken = async (userId) => {
   const user = await User.findById(userId._id);
@@ -199,17 +200,20 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
 export const getUser = asyncHandler(async (req, res) => {
   const { userId } = req.body;
+  console.log(userId);
 
-  const user = await User.findById({ _id: userId }).select("-password");
+  const user = await User.findById(userId).select("-password");
 
   if (!user) {
     throw new ApiError(400, "Cannot find User please register");
   }
-  const userQuestions = Question.find({ user: userId });
-
-  return res.status(200).json({
+  const userQuestions = await Question.find({ user: userId });
+  const userAnswer = await Answer.find({ user: userId });
+  console.log(userAnswer);
+  return res.status(200).send({
     success: true,
     user,
     userQuestions,
+    userAnswer,
   });
 });

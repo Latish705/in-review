@@ -3,6 +3,7 @@ import {
   registerUser,
   loginUser,
   logoutUser,
+  getUser,
 } from "../controllers/authController.js";
 // import { upload } from "../middlewares/multerMiddleware.js";
 import { verifyToken } from "../middlewares/authMiddleware.js";
@@ -21,5 +22,7 @@ authRouter.route("/register").post(
 authRouter.route("/login").post(loginUser);
 
 authRouter.route("/logout").post(verifyToken, logoutUser);
+
+authRouter.route("/getUserData").post(getUser);
 
 export default authRouter;
