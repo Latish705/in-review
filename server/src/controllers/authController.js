@@ -195,3 +195,5 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
     throw new ApiError(401, error?.message || "Invalid refresh token");
   }
 });
+
+export const getUser = asyncHandler(async (req, res) => {});

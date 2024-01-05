@@ -6,24 +6,22 @@ import QuestionInterface from "@/app/ui/home/questionInterface";
 import { getResponses } from "@/app/lib/actions";
 import { useParams, useSearchParams } from "next/navigation";
 
-
 export default function ResponsesPage(request) {
-  
   const params = useParams();
   const searchParams = useSearchParams();
 
   const questionId = params.id;
 
-  const title = searchParams.get('title');
-  const description = searchParams.get('description');
-  const upvotes = searchParams.get('upvotes');
-  const downvotes = searchParams.get('downvotes');
-  const name = searchParams.get('name')
-  console.log(upvotes)
-  console.log(downvotes)
+  const title = searchParams.get("title");
+  const description = searchParams.get("description");
+  const upvotes = searchParams.get("upvotes");
+  const downvotes = searchParams.get("downvotes");
+  const name = searchParams.get("name");
+  console.log(upvotes);
+  console.log(downvotes);
 
   const [answersArray, setAnswersArray] = React.useState([]);
-  
+
   React.useEffect(() => {
     const fillAnswersArray = async (Id) => {
       const responseArray = await getResponses(Id);
@@ -36,17 +34,16 @@ export default function ResponsesPage(request) {
 
   return (
     <div>
-
       <div>
         <QuestionInterface
-          name = {name}
-          title= {title}
+          name="anonymous"
+          title={title}
           description={description}
           upvotes={upvotes}
           downvotes={downvotes}
         />
       </div>
-      {answersArray ?
+      {answersArray ? (
         answersArray.map((thisAnswer) => (
           <AnswerInterface
             key={thisAnswer.upvotes}
@@ -55,13 +52,14 @@ export default function ResponsesPage(request) {
             downvotes={thisAnswer.downvotes}
             id={thisAnswer._id}
           />
-        )) : 
-          <div className="text-xl mt-10">
-            <p className="font-bold">{"Hmm!"}</p>
-            <p>{"This field is empty :/"}</p>
-            <p>{"give response and help student :)"}</p>
-          </div>
-        }
+        ))
+      ) : (
+        <div className="text-xl mt-10">
+          <p className="font-bold">{"Hmm!"}</p>
+          <p>{"This field is empty :/"}</p>
+          <p>{"give response and help student :)"}</p>
+        </div>
+      )}
     </div>
   );
 }
