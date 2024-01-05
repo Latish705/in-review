@@ -29,7 +29,7 @@ export default function Profile() {
   return (
     <main>
       <header>
-        <h1>Your information</h1>
+        <h1 className="text-[40px]">Your information</h1>
         <div>{userInfo.username}</div>
         <div>{userInfo.college}</div>
         <div>
@@ -39,7 +39,7 @@ export default function Profile() {
       </header>
 
       <div>
-        <div>Your Questions</div>
+        <div className="text-[40px]">Your Questions</div>
         <div>
           {userQuestions &&
             userQuestions.map((question) => {
