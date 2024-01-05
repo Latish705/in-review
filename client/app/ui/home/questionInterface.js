@@ -48,7 +48,7 @@ export default function QuestionInterface({
 
   return (
     <section className="border-b cursor-pointer hover:bg-gray-50 pt-10">
-      <Link href={`/home/${id}/details`}>
+      <Link href={`/home/${id}/details/?upvotes=${upvotes}&downvotes=${downvotes}&title=${title}&description=${description}&name=${name}`}>
         <header className="ml-1">
           <div>
             <img src="" alt="" />
