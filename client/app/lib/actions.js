@@ -57,7 +57,7 @@ export async function upvoteQuestion(questionId) {
       { questionId }
     );
 
-    console.log(response);
+    return response.data.upvotes;
   } catch (error) {
     throw new Error(error);
   }
@@ -65,11 +65,12 @@ export async function upvoteQuestion(questionId) {
 
 export async function downVoteQuestion(questionId) {
   try {
+    console.log(questionId);
     const response = await axios.post(
       "http://localhost:8080/api/v1/downvote-question",
-      questionId
+      { questionId }
     );
-    return response.data.updatedQuestion;
+    return response.data.downvotes;
   } catch (error) {
     throw new Error(error);
   }

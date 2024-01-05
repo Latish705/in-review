@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React from "react";
 import {
   upvoteQuestion,
   downVoteQuestion,
@@ -21,7 +22,9 @@ export default function QuestionInterface({
   //   };
 
   const [upvotesState, setUpvoteState] = React.useState(userResponse.upvotes);
-  const [downvotesState, setDownvotesState] = React.useState(userResponse.downvotes);
+  const [downvotesState, setDownvotesState] = React.useState(
+    userResponse.downvotes
+  );
 
   const handleKeyPress = async (event) => {
     console.log(id, userResponse);
@@ -36,9 +39,11 @@ export default function QuestionInterface({
   const handleUpvote = async (event) => {
     event.preventDefault();
     const responseOfUpvote = await upvoteQuestion(id);
+    console.log(responseOfUpvote);
     setUpvoteState(responseOfUpvote);
   };
-  const handleDownvote = async (id) => {
+  const handleDownvote = async (event) => {
+    event.preventDefault();
     const responseOfDownvote = await downVoteQuestion(id);
     setDownvotesState(responseOfDownvote);
   };

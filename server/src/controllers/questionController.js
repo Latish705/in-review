@@ -119,10 +119,14 @@ export const upvoteQuestion = asyncHandler(async (req, res) => {
 });
 
 export const downvoteQuestion = asyncHandler(async (req, res) => {
-  const { questionId } = req.params;
+  const { questionId } = req.body;
+  console.log(questionId);
   const updatedQuestion = await Question.findByIdAndUpdate(
     questionId,
     { $inc: { downvotes: 1 } },
     { new: true }
   );
+
+  console.log(updatedQuestion);
+  return res.json(updatedQuestion);
 });
